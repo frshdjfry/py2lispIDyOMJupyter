@@ -8,11 +8,6 @@ DOCKERFILE_PATH="$(dirname "$0")/Dockerfile"
 
 # Automatically use the current directory as the host directory to mount
 HOST_DIR=$(pwd)
-# Clone the py2lispIDyOM repository if it's not already cloned
-if [ ! -d "$HOST_DIR/py2lispIDyOM/.git" ]; then
-    echo "Cloning py2lispIDyOM repository into the current directory..."
-    git clone git@github.com:xinyiguan/py2lispIDyOM.git
-fi
 # Echo paths for user confirmation
 echo "Dockerfile Path: $DOCKERFILE_PATH"
 echo "Host Directory: $HOST_DIR"
