@@ -7,12 +7,12 @@ This setup consists of a Bash script paired with a Dockerfile, designed to facil
 1. **Install Docker**: [Get Docker](https://docs.docker.com/get-docker/)
 2. **Clone the Repository**: Clone this repo to your local machine.
 3. **Make the Script Executable**:
-`chmod +x start_docker.sh`
+`chmod +x start_jupyter.sh`
 4. **Launch JupyterLab**:
-`./start_docker.sh`
+`./start_jupyter.sh`
 5. **Access JupyterLab**:
 - Open JupyterLab in your browser: [http://127.0.0.1:8888/lab/](http://127.0.0.1:8888/lab/)
-- For a quick start, navigate to: [Tutorial Notebook](http://127.0.0.1:8888/lab/workspaces/auto-H/tree/example_usage.ipynb)
+- Find a quick start at `example_usage.ipynb`.
 
 ### List of harmonic viewpoints that are available to use:
 
