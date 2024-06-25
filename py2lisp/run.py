@@ -120,6 +120,6 @@ class IDyOMExperiment:
         ])
         assert run_condition
         print('** running lisp script **')
-        os.system("sbcl --noinform --load " + self.generate_lisp_script())
+        os.system("sbcl --dynamic-space-size 4096 --noinform --load " + self.generate_lisp_script())
         print(' ')
         print('** Finished! **')
