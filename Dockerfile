@@ -1,5 +1,8 @@
-# Use an Ubuntu base image
-FROM ubuntu:latest
+# Use an Ubuntu 22.04 base image
+FROM ubuntu:22.04
+
+# Set environment variables to avoid user interaction during package installation
+ENV DEBIAN_FRONTEND=noninteractive
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
@@ -8,7 +11,7 @@ RUN apt-get update && apt-get install -y \
     libsqlite3-dev \
     wget \
     unzip \
-    python3-pip \
+    python3-venv \
     python3-dev \
     gcc
 
@@ -25,8 +28,10 @@ RUN wget https://github.com/mtpearce/idyom/archive/refs/heads/master.zip -O idyo
     unzip idyom.zip -d /root/quicklisp/local-projects/ && \
     mkdir -p /root/idyom/db /root/idyom/data/cache /root/idyom/data/models /root/idyom/data/resampling
 
-# Install JupyterLab and py2lispIDyOM
-RUN pip3 install jupyterlab py2lispIDyOM
+# Set up a Python virtual environment and install JupyterLab and py2lispIDyOM
+RUN python3 -m venv /root/venv && \
+    /root/venv/bin/pip install --upgrade pip && \
+    /root/venv/bin/pip install jupyterlab py2lispIDyOM
 
 # Create the .sbclrc file if it doesn't exist and append IDyOM configurations
 RUN touch /root/.sbclrc && \
@@ -57,4 +62,4 @@ WORKDIR /work
 EXPOSE 8888
 
 # Start JupyterLab with configuration to allow access from the browser
-CMD ["jupyter", "lab", "--ip=0.0.0.0", "--allow-root", "--NotebookApp.token=''", "--NotebookApp.password=''"]
+CMD ["/root/venv/bin/jupyter", "lab", "--ip=0.0.0.0", "--allow-root", "--NotebookApp.token=''", "--NotebookApp.password=''"]
